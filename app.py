@@ -7,6 +7,9 @@ app.config['SECRET_KEY'] = "never-tell!"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 debug = DebugToolbarExtension(app)
+answer_key = {question.question: [choice for choice in question.choices]
+              for question in survey.questions}
+print(answer_key)
 
 
 @app.get("/")
@@ -58,6 +61,7 @@ def get_answer():
         return redirect(f"/questions/{q_id}")
     else:
         return redirect('/complete')
+
 
 @app.get('/complete')
 def get_complete_stage():
